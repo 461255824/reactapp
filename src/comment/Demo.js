@@ -1,41 +1,80 @@
-import React, { Component } from 'react';
-import { Table } from 'antd';
+import React, {
+  Component
+} from 'react';
+import {
+  Table
+} from 'antd';
+import axios from 'axios';
 class Hello extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    console.log(props)
-    this.msg = "你好世界"
+    this.state = {
+      dataSource:[{
+        entId: 1,
+        entName: "企业1",
+        maintenanceCount: 0,
+        markerCount: 0,
+        refuelCount: 0,
+        repairCount: 0,
+        stationCount: 0
+      }],
+      columns:[{
+        title: '企业名称',
+        dataIndex: 'entName',
+        key: '1',
+      }, {
+        title: '站点',
+        dataIndex: 'stationCount',
+        key: '2',
+      }, {
+        title: '地理围栏',
+        dataIndex: 'markerCount',
+        key: '3',
+      }, {
+        title: '保养记录',
+        dataIndex: 'maintenanceCount',
+        key: '4',
+      }, {
+        title: '加油记录',
+        dataIndex: 'refuelCount',
+        key: '5',
+      }, {
+        title: '维修记录',
+        dataIndex: 'stationCount',
+        key: '6',
+      }]
+    }
+  }
+  componentWillMount() {
+    let url = 'https://ccp.virtueit.net/cd-dev/report-service/services/stat/otherBusiData'
+    let params = {
+      "currentPage": 1,
+      "entName": "",
+      "numPerPage": 20,
+      "sortCol": "0",
+      "sortType": "ASC",
+      "source": "0"
+    }
+    
+    let _this = this
+    axios.post(url, params).then(function (data) {
+      console.log('请求回来的数据', data)
+      let list = data.data.result.resultList
+      _this.setState({
+        dataSource:list
+      })
+    })
   }
   render() {
-    const dataSource = [{
-        key: '1',
-        name: '胡彦斌',
-        age: 32,
-        address: '西湖区湖底公园1号'
-      }, {
-        key: '2',
-        name: '胡彦祖',
-        age: 42,
-        address: '西湖区湖底公园1号'
-      }];
-      
-      const columns = [{
-        title: '姓名',
-        dataIndex: 'name',
-        key: 'name',
-      }, {
-        title: '年龄',
-        dataIndex: 'age',
-        key: 'age',
-      }, {
-        title: '住址',
-        dataIndex: 'address',
-        key: 'address',
-      }];
-      
-      
-    return (
-        <Table dataSource={dataSource} columns={columns} />
+    return ( <
+      Table dataSource = {
+        this.state.dataSource
+      }
+      rowKey="entId"
+      columns = {
+        this.state.columns
+      }
+      />
     );
   }
 }
