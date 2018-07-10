@@ -8,6 +8,7 @@ import axios from 'axios';
 class Hello extends Component {
   constructor(props) {
     super(props)
+    console.log('组件',props)
     this.state = {
       dataSource:[{
         entId: 1,
