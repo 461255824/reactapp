@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reactivex/rxjs": "^6.2.1",
     "antd": "^3.6.5",
     "axios": "^0.18.0",
     "element-react": "^1.4.20",
@@ -14,7 +15,9 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "rxjs": "^6.2.1",
+    "rxjs-compat": "^6.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

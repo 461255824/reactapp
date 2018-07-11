@@ -3,20 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
-import Hello from './comment/Hello';
-import Demo from './comment/Demo'
 import Login from './comment/Login';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore,applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux'
-import Test from './Test'
 import thunkMiddleware from 'redux-thunk'
 import {
-    Switch,
     BrowserRouter as Router,
     Route,
     Redirect,
-    Link
   } from 'react-router-dom'
   function counter(state = 0, action) {
     switch (action.type) {
@@ -30,7 +25,6 @@ import {
       return state;
     }
   }
-  console.log('柯理化函数',thunkMiddleware)
   // 创建 Redux store 来存放应用的状态。
   // API 是 { subscribe, dispatch, getState }。
   let store = createStore(counter,applyMiddleware(
@@ -60,7 +54,6 @@ import {
         </div>
     </Router>
   )
-  console.log('store',store,Provider)
 ReactDOM.render(
   <Provider store={store}>
     <BasicExample  />

@@ -6,13 +6,11 @@ import {
 } from 'react-router-dom';
 import Hello from './comment/Hello'
 import Demo from './comment/Demo'
+import RxDemo from './comment/Rx'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 require('./App.css')
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
   render() {
     return (
       <Layout id='main'>
@@ -30,7 +28,9 @@ class App extends Component {
             <Menu.Item key="3">
             <Link to="/main/demo" >Demo</Link>
             </Menu.Item>
-            
+            <Menu.Item key="4">
+            <Link to="/main/rx" >Rx</Link>
+            </Menu.Item>
           </Menu>
           <Button type="primary" onClick={()=>this.props.history.push('/login')}>
               点击退出登录
@@ -73,6 +73,7 @@ class App extends Component {
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
               <Route  path="/main/hello"   component={Hello} />
               <Route  path="/main/demo"   component={Demo} />
+              <Route  path="/main/rx"   component={RxDemo} />
             </Content>
           </Layout>
         </Layout>

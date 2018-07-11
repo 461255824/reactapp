@@ -8,7 +8,6 @@ import axios from 'axios';
 class Hello extends Component {
   constructor(props) {
     super(props)
-    console.log('组件',props)
     this.state = {
       dataSource:[{
         entId: 1,
@@ -59,7 +58,6 @@ class Hello extends Component {
     
     let _this = this
     axios.post(url, params).then(function (data) {
-      console.log('请求回来的数据', data)
       let list = data.data.result.resultList
       _this.setState({
         dataSource:list

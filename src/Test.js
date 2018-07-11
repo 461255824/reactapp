@@ -19,7 +19,6 @@ class Test extends React.Component{
     state
   })
   
-  const mapDispatchToProps = dispatch => dispatch
   export default connect(
       mapStateToProps,
   )(Test)
