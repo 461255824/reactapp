@@ -8,32 +8,24 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore,applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
+import reducer from'./reducer/index.js'
+import createSagaMiddleware from 'redux-saga';
+import sagas from './sagas/index.js';
 import {
     BrowserRouter as Router,
     Route,
     Redirect,
   } from 'react-router-dom'
-  function counter(state = 0, action) {
-    switch (action.type) {
-    case 'INCREMENT':
-      console.log('INCREMENT---->'+(state + 1))
-      return state + 1;
-    case 'DECREMENT':
-      console.log('INCREMENT---->'+(state - 1))
-      return state - 1;
-    default:
-      return state;
-    }
-  }
   // 创建 Redux store 来存放应用的状态。
   // API 是 { subscribe, dispatch, getState }。
-  let store = createStore(counter,applyMiddleware(
-    thunkMiddleware, // 允许我们 dispatch() 函数
+  const sagaMiddleware = createSagaMiddleware();
+  let store = createStore(reducer,applyMiddleware(
+    sagaMiddleware, // 允许我们 dispatch() 函数
   ));
-  
+  sagaMiddleware.run(sagas)
   // 可以手动订阅更新，也可以事件绑定到视图层。
   store.subscribe(() =>
-    console.log(store.getState())
+    console.log('树',store.getState())
   );
   
   // 改变内部 state 惟一方法是 dispatch 一个 action。

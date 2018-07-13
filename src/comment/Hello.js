@@ -7,30 +7,28 @@ class Hello extends Component {
     super(props)
     console.log('2',props)
     this.msg = "你好世界"
+    
   }
   render() {
+    const {dispatch} = this.props;
     return (
       <div className="hell">
-        向世界打招呼{this.msg+this.props.number}
-        <Button onClick={()=>this.props.add('INCREMENT')}>点击增加</Button>
+        向世界打招呼{this.msg}+stroe--->{this.props.store.number}
+        <Button onClick={()=>this.props.addFn('Add')}>点击增加</Button>
       </div>
       
     );
   }
 }
 
-export default connect((state)=>{
+export default connect((store)=>{
   return {
-    number:state
+    store
   }
 },(dispatch)=>{
   return {
-    add:bindActionCreators(function(type){//异步
-      return function(dispatch){
-        setTimeout(function(){
-          dispatch({type})
-        },1000)
-      }
-    },dispatch)
+    addFn:function(type){
+      dispatch({type:'Add'})
+    }
   }
 })(Hello);
